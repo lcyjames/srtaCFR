@@ -1,5 +1,5 @@
 # srtaCFR #
-srtaCFR (which stands for <ins>**s**</ins>tandized<ins>**r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu et al. (2022) <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>.
+srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu et al. (2022) <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>.
 
 **rtaCFR** relies on the R-packages `genlasso` and `Rtools`, which are hosted on CRAN.
 
