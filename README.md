@@ -30,8 +30,9 @@ This function generates a data set according to the model in Qu and Lee (2024+) 
 
 Take scenario III in the simulation study in Qu and Lee (2024+) as an example:
 ```
-Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)), ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
-          pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1234)
+Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)),
+                    ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
+                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1234)
 
 head(Data$ct_mat)
 #[1,] 1036  974 3040
