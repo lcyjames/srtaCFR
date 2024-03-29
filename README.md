@@ -16,7 +16,7 @@ rtaCFR.EST  | Computation of the rtaCFR as proposed in Qu et al. (2022); usage p
 srtaCFR.SIM  | Generate a data set according to the simulation study in Qu and Lee (2024+)
 srtaCFR.EST  | Computation of the srtaCFR as proposed in Qu and Lee (2024+)
 
-<ins>**rtaCFR.SIM**</ins>
+<ins>**srtaCFR.SIM**</ins>
 
 ```
 srtaCFR.SIM(ct, ct_prop_mat, pt_mat, seed = NA, F_mean = 15.43, F_shape = 2.03)
