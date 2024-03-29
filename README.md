@@ -6,14 +6,15 @@ srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t*
 # How to import the Functions #
 > install.packages("devtools")<br />
 > library(devtools) <br /> 
-> source_url("https://github.com/lcyjames/rtaCFR/blob/main/CoreFunctions.R?raw=TRUE")
+> source_url("https://github.com/lcyjames/srtaCFR/blob/main/CoreFunctions.R?raw=TRUE")
 
 # Usage #
-The package contains 2 functions:
+The package contains 3 functions:
 |Functions  | Description|
 |------------- | -------------|
-rtaCFR.SIM  | Generate a data set according to the simulation study in Qu et al. (2022)
+srtaCFR.SIM  | Generate a data set according to the simulation study in Qu and Lee (2024+)
 rtaCFR.EST  | Computation of the rtaCFR as proposed in Qu et al. (2022)
+srtaCFR.EST  | Computation of the srtaCFR as proposed in Qu and Lee (2024+)
 
 <ins>**rtaCFR.SIM**</ins>
 
