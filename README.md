@@ -32,7 +32,7 @@ Take scenario III in the simulation study in Qu and Lee (2024+) as an example:
 ```
 Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)),
                     ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
-                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1234)
+                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1)
 
 head(Data$ct_mat)
 #[1,] 1036  974 3040
@@ -50,40 +50,49 @@ head(Data$dt_mat)
 #[5,] 1.42538446 2.5242256 25.479600
 #[6,] 1.86519333 3.5626964 34.244764
 ```
-`ct_mat` contains the observed number of confirmed cases in each category, generated based on the multinomial distribution given `ct` and `ct_prop_mat`
-`dt_mat` contains the observed number of deaths in each category, according to `pt_mat` and the reporting delay from disease onset to death (`F_mean' and `F_shape`)
-
 This data structure is as follows:
->- `ct` is the number of confirmed cases
->- `dt` is the number of deaths with reporting delay from disease onset to death
+`ct_mat` contains the observed confirmed cases in each category, generated via the multinomial distribution given `ct` and `ct_prop_mat`
+`dt_mat` contains the observed deaths in each category, according to `pt_mat` and the reporting delay from disease onset to death, controlled by `F_mean` and `F_shape`
 
-<ins>**rtaCFR.EST**</ins>
+<ins>**srtaCFR.EST**</ins>
 
 ```
-rtaCFR.EST(ct, dt, F_mean = 15.43, F_shape = 2.03, maxsteps = 10000)
+srtaCFR.EST(ct_mat, dt_mat, q_mat=NA, F_mean = 15.43, F_shape = 2.03, maxsteps = 10000)
 ```
-This function computes the rtaCFR as proposed in Qu et al. (2022). The details of the arguments are as follows:
->- `ct` is the number of confirmed cases
->- `dt` is the number of deaths
+This function computes the srtaCFR as proposed by Qu and Lee (2024). The details of the arguments are as follows:
+>- `ct_mat` is the number of confirmed cases in each category across the time points, a matrix of dimension `N` times `J` with `J>2`
+>- `dt_mat` is the number of deaths in each category across the time points, a matrix of dimension `N` times `J`
+>- `q_mat` is the prespecified distribution used to standardize the fatality rates for each category, a matrix of dimension `N` times `J`, set to an even distribution across the time points as default
 >- `F_mean` is the mean of the gamma distribution for the time from disease onset to death
 >- `F_shape` is the shape parameter of the gamma distribution for the time from disease onset to death
 >- `maxsteps` is an integer specifying the maximum number of steps for the fused lasso to take before termination
 
 Example:
 ```
-Data <- rtaCFR.SIM(ct = 3000-5*abs(100-c(1:200)), pt = 0.01*exp(0.012*c(1:200)), seed = 1)
-rt_fit <- rtaCFR.EST(ct = Data$ct, dt = Data$dt)
+Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)),
+                    ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
+                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1)
+srt_fit <-srtaCFR(ct_mat = Data$ct_mat, dt_mat = Data$dt_mat)
 
-round(head(rt_fit$p_hat),4)
-# [1] 0.0088 0.0096 0.0107 0.0131 0.0087 0.0134
-round(tail(rt_fit$p_hat),4)
-# [1] 0.1030 0.1131 0.1018 0.1135 0.1102 0.1024
+> round(head(srt_fit$p_gp_spec),4) #Group-specific fatality rates
+#[1,] 0.0110 0.0182 0.0566
+#[2,] 0.0076 0.0163 0.0624
+#[3,] 0.0119 0.0214 0.0543
+#[4,] 0.0150 0.0159 0.0550
+#[5,] 0.0085 0.0215 0.0580
+#[6,] 0.0064 0.0220 0.0565
+> round(head(srt_fit$p_hat_std),4) #Standardized fatality rate
+#[1] 0.0286 0.0288 0.0292 0.0286 0.0293 0.0283
 ```
 
 ```
-plot(rt_fit$p_hat, type="b", pch = 19, ylab = "Fatality rates", xlab = "Time", col = "red", cex = 0.6)
-lines(c(1:200), 0.01*exp(0.012*c(1:200)), lwd = 2)
-legend("topleft", legend = c("rtaCFR", "true"), col = c("red", "black"), lty = c(1,1),lwd = c(1:2), pch = c(19,NA), cex = 0.8)
+plot(srt_fit$p_gp_spec[,1], ylab="Group-specific fatality rates", xlab="Time", type="l", #xaxt="n",
+     lwd=2, col="darkgreen", xlim=c(0,200), ylim=c(0,0.15))
+lines(srt_fit$p_gp_spec[,2], lty=2, type="l", lwd=2, col="red")
+lines(srt_fit$p_gp_spec[,3], lty=3, type="l", lwd=2, col="blue")
+legend("topleft",col=c("darkgreen","red","blue"),lty=c(1,2,3), lwd = c(1.5,1.5,1.5),bty = "n",x.intersp=0.5,text.width=35,
+       legend = c(expression(paste("rtaCFR"^"(1)")), expression(paste("rtaCFR"^"(2)")), expression(paste("rtaCFR"^"(3)"))),
+       ncol = 3,cex=1)
 
 ```
 <img src="https://github.com/lcyjames/rtaCFR/blob/main/example.png" width="600"/>
