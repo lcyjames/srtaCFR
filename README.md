@@ -30,12 +30,12 @@ This function generates a data set according to the model in Qu and Lee (2024+) 
 
 Take scenario III in the simulation study in Qu and Lee (2024+) as an example:
 ```
-Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)),
-                    ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
-                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1)
+Data <- srtaCFR.SIM(ct = 10000-50*abs(100-c(1:200)),
+                    ct_prop_mat = cbind(seq(0.2, 0.6, length.out = 200), 0.2, seq(0.6, 0.2, length.out = 200)),
+                    pt_mat = cbind(rep(0.01, 200), rep(0.02, 200), rep(0.06, 200))*replicate(3, exp(c(1:200)*0.004)), seed = 1)
 
 head(Data$ct_mat)
-#[1,] 1036  974 3040
+#[1,] 1036 974 3040
 #[2,] 1012 1020 3068
 #[3,] 1057 1027 3066
 #[4,] 1101 1106 2993
@@ -69,43 +69,40 @@ This function computes the srtaCFR as proposed by Qu and Lee (2024). The details
 
 Example:
 ```
-Data <- srtaCFR.SIM(ct=10000-50*abs(100-c(1:200)),
-                    ct_prop_mat=cbind(seq(0.2,0.6,length.out=200),0.2,seq(0.6,0.2,length.out=200)),
-                    pt_mat=cbind(rep(0.01,200),rep(0.02,200),rep(0.06,200))*replicate(3,exp(c(1:200)*0.004)), seed = 1)
+Data <- srtaCFR.SIM(ct = 10000-50*abs(100-c(1:200)),
+                    ct_prop_mat = cbind(seq(0.2, 0.6, length.out = 200), 0.2, seq(0.6, 0.2, length.out = 200)),
+                    pt_mat = cbind(rep(0.01, 200), rep(0.02, 200), rep(0.06, 200))*replicate(3, exp(c(1:200)*0.004)), seed = 1)
 srt_fit <-srtaCFR(ct_mat = Data$ct_mat, dt_mat = Data$dt_mat)
 
-> round(head(srt_fit$p_gp_spec),4) #Group-specific fatality rates
+> round(head(srt_fit$p_gp_spec), 4) #Group-specific fatality rates
 #[1,] 0.0110 0.0182 0.0566
 #[2,] 0.0076 0.0163 0.0624
 #[3,] 0.0119 0.0214 0.0543
 #[4,] 0.0150 0.0159 0.0550
 #[5,] 0.0085 0.0215 0.0580
 #[6,] 0.0064 0.0220 0.0565
-> round(head(srt_fit$p_hat_std),4) #Standardized fatality rate
+> round(head(srt_fit$p_hat_std), 4) #Standardized fatality rate
 #[1] 0.0286 0.0288 0.0292 0.0286 0.0293 0.0283
 ```
 
 ```
-plot(srt_fit$p_gp_spec[,1], ylab="Group-specific fatality rates", xlab="Time", type="l", #xaxt="n",
-     lwd=2, col="darkgreen", xlim=c(0,200), ylim=c(0,0.15))
-lines(srt_fit$p_gp_spec[,2], lty=2, type="l", lwd=2, col="red")
-lines(srt_fit$p_gp_spec[,3], lty=3, type="l", lwd=2, col="blue")
-legend("topleft",col=c("darkgreen","red","blue"),lty=c(1,2,3), lwd = c(1.5,1.5,1.5),bty = "n",x.intersp=0.5,text.width=35,
+plot(srt_fit$p_gp_spec[,1], ylab = "Group-specific fatality rates", xlab = "Time", type="l",
+     lwd = 2, col = "darkgreen", xlim = c(0,200), ylim = c(0,0.15))
+lines(srt_fit$p_gp_spec[,2], lty = 2, type = "l", lwd = 2, col = "red")
+lines(srt_fit$p_gp_spec[,3], lty = 3, type = "l", lwd = 2, col = "blue")
+legend("topleft", col = c("darkgreen", "red", "blue"), lty = c(1, 2, 3), lwd = c(1.5, 1.5, 1.5), bty = "n", x.intersp = 0.5, text.width = 35,
        legend = c(expression(paste("rtaCFR"^"(1)")), expression(paste("rtaCFR"^"(2)")), expression(paste("rtaCFR"^"(3)"))),
-       ncol = 3,cex=1)
+       ncol = 3, cex = 1)
 
 ```
 <img src="https://github.com/lcyjames/srtaCFR/blob/main/example1.png" width="600"/>
 
 ```
 rt <-rtaCFR.EST(ct = rowSums(Data$ct_mat), dt = rowSums(Data$dt_mat))
-plot(srt_fit$p_hat_std, lty=1, type="l", lwd=2, col="darkgreen", xlab="Time", ylab="Fatality rates",
-     xlim=c(0,200), ylim=c(0,0.1))
-lines(rt$p_hat, lty=2, lwd=2, col="red")
-legend("topleft",col=c("darkgreen","red"),lty=c(1,2),
-       lwd = c(1.5,1.5),bty = "n",x.intersp=0.5,text.width=40,
-       legend = c(expression(paste("srtaCFR")),
-                  expression(paste("rtaCFR (non-stratified)"))),ncol = 3,cex=1)
+plot(srt_fit$p_hat_std, lty = 1, type = "l", lwd = 2, col = "darkgreen", xlab = "Time", ylab = "Fatality rates", xlim = c(0,200), ylim = c(0,0.1))
+lines(rt$p_hat, lty = 2, lwd = 2, col = "red")
+legend("topleft", col = c("darkgreen","red"), lty = c(1,2), lwd = c(1.5,1.5), bty = "n", x.intersp = 0.5, text.width = 40,
+       legend = c(expression(paste("srtaCFR")), expression(paste("rtaCFR (non-stratified)"))), ncol = 3, cex = 1)
 ```
 <img src="https://github.com/lcyjames/srtaCFR/blob/main/example2.png" width="600"/>
 
@@ -114,3 +111,4 @@ Lee Chun Yin, James <<james-chun-yin.lee@polyu.edu.hk>>
 
 # Reference #
 Qu, Y., Lee, C. Y., and Lam, K. F. (2022). A novel method to monitor COVID-19 fatality rate in real-time, a key metric to guide public health policy. Scientific Reports, 12(1), 18277. <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>
+Qu, Y., and Lee, C. Y. (2024+).
