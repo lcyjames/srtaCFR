@@ -95,7 +95,19 @@ legend("topleft",col=c("darkgreen","red","blue"),lty=c(1,2,3), lwd = c(1.5,1.5,1
        ncol = 3,cex=1)
 
 ```
-<img src="https://github.com/lcyjames/rtaCFR/blob/main/example.png" width="600"/>
+<img src="https://github.com/lcyjames/srtaCFR/blob/main/example1.png" width="600"/>
+
+```
+rt <-rtaCFR.EST(ct = rowSums(Data$ct_mat), dt = rowSums(Data$dt_mat))
+plot(srt_fit$p_hat_std, lty=1, type="l", lwd=2, col="darkgreen", xlab="Time", ylab="Fatality rates",
+     xlim=c(0,200), ylim=c(0,0.1))
+lines(rt$p_hat, lty=2, lwd=2, col="red")
+legend("topleft",col=c("darkgreen","red"),lty=c(1,2),
+       lwd = c(1.5,1.5),bty = "n",x.intersp=0.5,text.width=40,
+       legend = c(expression(paste("srtaCFR")),
+                  expression(paste("rtaCFR (non-stratified)"))),ncol = 3,cex=1)
+```
+<img src="https://github.com/lcyjames/srtaCFR/blob/main/example2.png" width="600"/>
 
 # Contact #
 Lee Chun Yin, James <<james-chun-yin.lee@polyu.edu.hk>>
