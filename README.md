@@ -1,5 +1,5 @@
 # srtaCFR #
-srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the standardized real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu and Lee (2024+) (Under revision).
+srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the standardized real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu and Lee (2024+) (Under Revision).
 
 **srtaCFR** relies on the R-packages `genlasso` and `Rtools`, which are hosted on CRAN.
 
@@ -112,4 +112,5 @@ Lee Chun Yin, James <<james-chun-yin.lee@polyu.edu.hk>>
 
 # Reference #
 Qu, Y., Lee, C. Y., and Lam, K. F. (2022). A novel method to monitor COVID-19 fatality rate in real-time, a key metric to guide public health policy. Scientific Reports, 12(1), 18277. <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>
-Qu, Y., and Lee, C. Y. (2024+).
+
+Qu, Y., and Lee, C. Y. (2024+). Estimation of standardized real-time fatality rate for ongoing epidemics (Under Revision)
