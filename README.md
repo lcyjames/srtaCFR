@@ -72,7 +72,7 @@ Example:
 Data <- srtaCFR.SIM(ct = 10000-50*abs(100-c(1:200)),
                     ct_prop_mat = cbind(seq(0.2, 0.6, length.out = 200), 0.2, seq(0.6, 0.2, length.out = 200)),
                     pt_mat = cbind(rep(0.01, 200), rep(0.02, 200), rep(0.06, 200))*replicate(3, exp(c(1:200)*0.004)), seed = 1)
-srt_fit <-srtaCFR(ct_mat = Data$ct_mat, dt_mat = Data$dt_mat)
+srt_fit <-srtaCFR.EST(ct_mat = Data$ct_mat, dt_mat = Data$dt_mat)
 
 round(head(srt_fit$p_gp_spec), 4) #Group-specific fatality rates
 # [1,] 0.0119 0.0169 0.0596
