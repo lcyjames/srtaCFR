@@ -41,7 +41,7 @@ dt_sum<-apply(dt_mat,2,sum)
 return(list(ct_mat=as.matrix(t(ct_mat)),dt_mat=as.matrix(t(dt_mat))))
 }
 
-srtaCFR<-function(ct_mat, dt_mat, q_mat=NA, F_mean = 15.43, F_shape = 2.03, maxsteps = 10000){
+srtaCFR.EST<-function(ct_mat, dt_mat, q_mat=NA, F_mean = 15.43, F_shape = 2.03, maxsteps = 10000){
   if(is.matrix(ct_mat)==FALSE){print("ERROR: ct_mat is not a matrix.");break}
   if(is.matrix(dt_mat)==FALSE){print("ERROR: dt_mat is not a matrix.");break}
   J<-ncol(ct_mat)
