@@ -15,7 +15,10 @@ The package contains 3 functions:
 rtaCFR.EST  | Computation of the rtaCFR as proposed in Qu et al. (2022); usage provided in https://github.com/lcyjames/rtaCFR
 srtaCFR.SIM  | Generate a data set according to the simulation study in Qu and Lee (2024+)
 srtaCFR.EST  | Computation of the srtaCFR as proposed in Qu and Lee (2024+)
-Germany_Analysis | Perform the case study of Germany in Qu and Lee (2024+)
+
+|R program  | Description|
+|------------- | -------------|
+Germany_Analysis.R | Perform the case study of Germany based on the above functions as in Qu and Lee (2024+)
 
 <ins>**srtaCFR.SIM**</ins>
 
