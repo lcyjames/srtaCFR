@@ -116,4 +116,5 @@ Lee Chun Yin, James <<james-chun-yin.lee@polyu.edu.hk>>
 
 # Reference #
 Qu, Y., Lee, C. Y., and Lam, K. F. (2022). A novel method to monitor COVID-19 fatality rate in real-time, a key metric to guide public health policy. Scientific Reports, 12(1), 18277. <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>
+
 Qu, Y., and Lee, C. Y. (2024). Estimation of standardized real time fatality rate for ongoing epidemics. PLoS One, <DOI: [10.1371/journal.pone.0303861](https://doi.org/10.1371/journal.pone.0303861)>
