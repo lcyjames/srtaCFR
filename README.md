@@ -1,5 +1,5 @@
 # srtaCFR #
-srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the standardized real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu and Lee (2024+) (Under Revision).
+srtaCFR (which stands for <ins>**s**</ins>tandized<ins> **r**</ins>eal-<ins>**t**</ins>ime <ins>**a**</ins>djusted <ins>**C**</ins>ase <ins>**F**</ins>atality <ins>**R**</ins>ate) is a package that performs estimation of the standardized real-time fatality rates with adjustment for reporting delay in deaths proposed by Qu and Lee (2024).
 
 **srtaCFR** relies on the R-packages `genlasso` and `Rtools`, which are hosted on CRAN.
 
@@ -13,26 +13,26 @@ The package contains 3 functions:
 |Functions  | Description|
 |------------- | -------------|
 rtaCFR.EST  | Computation of the rtaCFR as proposed in Qu et al. (2022); usage provided in https://github.com/lcyjames/rtaCFR
-srtaCFR.SIM  | Generate a data set according to the simulation study in Qu and Lee (2024+)
-srtaCFR.EST  | Computation of the srtaCFR as proposed in Qu and Lee (2024+)
+srtaCFR.SIM  | Generate a data set according to the simulation study in Qu and Lee (2024)
+srtaCFR.EST  | Computation of the srtaCFR as proposed in Qu and Lee (2024)
 
 |R program  | Description|
 |------------- | -------------|
-Germany_Analysis.R | Perform the case study of Germany based on the above functions as in Qu and Lee (2024+)
+Germany_Analysis.R | Perform the case study of Germany based on the above functions as in Qu and Lee (2024)
 
 <ins>**srtaCFR.SIM**</ins>
 
 ```
 srtaCFR.SIM(ct, ct_prop_mat, pt_mat, seed = NA, F_mean = 15.43, F_shape = 2.03)
 ```
-This function generates a data set according to the model in Qu and Lee (2024+) that takes the arguments:
+This function generates a data set according to the model in Qu and Lee (2024) that takes the arguments:
 >- `ct` is the number of confirmed cases in the population across the `N` time points, a vector of length `N`
 >- `ct_prop_mat` is the proportion of confirmed cases in each category across the time points, a matrix of dimension `N` times `J`; `J` is the total number of categories
 >- `pt_mat` is the proportion of confirmed cases who will eventually die from the disease in each category, a matrix of dimension `N` times `J`
 >- `F_mean` is the mean of the gamma distribution for the time from disease onset to death
 >- `F_shape` is the shape parameter of the gamma distribution for the time from disease onset to death
 
-Take scenario III in the simulation study in Qu and Lee (2024+) as an example:
+Take scenario III in the simulation study in Qu and Lee (2024) as an example:
 ```
 Data <- srtaCFR.SIM(ct = 10000-50*abs(100-c(1:200)),
                     ct_prop_mat = cbind(seq(0.2, 0.6, length.out = 200), 0.2, seq(0.6, 0.2, length.out = 200)),
@@ -116,5 +116,4 @@ Lee Chun Yin, James <<james-chun-yin.lee@polyu.edu.hk>>
 
 # Reference #
 Qu, Y., Lee, C. Y., and Lam, K. F. (2022). A novel method to monitor COVID-19 fatality rate in real-time, a key metric to guide public health policy. Scientific Reports, 12(1), 18277. <DOI: [10.1038/s41598-022-23138-4](https://doi.org/10.1038/s41598-022-23138-4)>
-
-Qu, Y., and Lee, C. Y. (2024+). Estimation of standardized real-time fatality rate for ongoing epidemics (Under Revision)
+Qu, Y., and Lee, C. Y. (2024). Estimation of standardized real time fatality rate for ongoing epidemics. PLoS One, <DOI: [10.1371/journal.pone.0303861](https://doi.org/10.1371/journal.pone.0303861)>
